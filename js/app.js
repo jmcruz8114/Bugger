@@ -9,7 +9,7 @@ var Enemy = function() {
     this.x = -100;
     this.y = allY[Math.floor(Math.random() * 4)];
     this.speed = Math.floor(100 + (Math.random() * 300));
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -17,32 +17,32 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if(this.x < ctx.canvas.width){
+    if(this.x < ctx.canvas.width) {
         this.x += this.speed * dt;
     }
     // If the enemy is off the screen, reset position
-    else{
+    else {
         this.x = -100;
         this.y = allY[Math.floor(Math.random() * 4)];
         this.speed = Math.floor(100 + (Math.random() * 300));
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
-var Player = function(x,y){
+var Player = function(x,y) {
     this.sprite ='images/char-boy.png';
     this.x = x;
     this.y = y;
-}
+};
 
 // This class requires an update(), render() and
 // a handleInput() method.
-Player.prototype.update = function(dt){
+Player.prototype.update = function(dt) {
     // If player reaches top row, reset back to start
     if(this.y < 50){
         player.reset();
@@ -53,7 +53,7 @@ Player.prototype.update = function(dt){
         'top':    this.y,
         'right':  this.x + 50,
         'bottom': this.y + 70,
-    }
+    };
     // Iterate through allEnemies and define enemy area
     for(e = 0; e < allEnemies.length; e++){
         bugPosition = {
@@ -61,25 +61,25 @@ Player.prototype.update = function(dt){
             'top':    allEnemies[e].y,
             'right':  allEnemies[e].x + 70,
             'bottom': allEnemies[e].y + 70,
-        }
+        };
     // Collision detection
     if(playerPosition.left < bugPosition.right &&
         playerPosition.top < bugPosition.bottom &&
         playerPosition.right > bugPosition.left &&
         playerPosition.bottom > bugPosition.top){
-        player.reset(); }
+        this.reset(); }
     }
-}
+};
 
 // Reset player back to starting position.
-Player.prototype.reset = function(){
+Player.prototype.reset = function() {
     this.x = 303;
     this.y = 400;
-}
+};
 
-Player.prototype.render = function(){
+Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.handleInput = function(key) {
     if(key === 'left' && this.x > 25){
@@ -94,7 +94,7 @@ Player.prototype.handleInput = function(key) {
     if(key === 'down' && this.y < 400){
         this.y += 83;
     }
-}
+};
 
 // Now instantiate your objects.
 var enemy1 = new Enemy();
